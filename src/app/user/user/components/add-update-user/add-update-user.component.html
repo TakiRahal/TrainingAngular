@@ -1,0 +1,75 @@
+
+<div class="container">
+  <form class="row g-3" [formGroup]="fgUser" (ngSubmit)="onSubmit()">
+    <div class="col-md-6">
+      <label for="Id" class="form-label">Id</label>
+      <input type="number" class="form-control" id="Id" formControlName="id" [attr.disabled]="customer?.id ? null : true">
+    </div>
+
+    <div class="col-md-6">
+      <label for="fullname" class="form-label">Fullname</label>
+      <input type="text" class="form-control" id="fullname" formControlName="fullname">
+    </div>
+
+    <div class="col-md-6">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email">
+    </div>
+
+    <hr />
+
+    <div formGroupName="address" class="row">
+      <h3>Address</h3>
+      <div class="col-md-6">
+        <label for="street" class="form-label">Street</label>
+        <input type="text" class="form-control" id="street" placeholder="Street ..." formControlName="street">
+      </div>
+      <div class="col-md-6">
+        <label for="inputCity" class="form-label">City</label>
+        <input type="text" class="form-control" id="inputCity" formControlName="city">
+      </div>
+      <div class="col-md-6">
+        <label for="inputZip" class="form-label">Zip</label>
+        <input type="text" class="form-control" id="inputZip" formControlName="zip">
+      </div>
+    </div>
+
+    <hr />
+
+    <div formArrayName="skills" class="row">
+      <div class="d-inline-flex p-2">
+        <h3>Skills</h3>
+        <button type="button" class="btn btn-success mx-2" (click)="addSkills()">Add</button>
+      </div>
+
+      <div *ngFor="let skill of skills.controls; let i=index">
+        <div [formGroupName]="i" class="row">
+          <div class="col-md-5">
+            <label for="skillName" class="form-label">Skill Name</label>
+            <input type="text" class="form-control" id="skillName" formControlName="skillName">
+          </div>
+          <div class="col-md-5">
+            <label for="inputZip" class="form-label">Skill Type</label>
+            <select class="form-select" aria-label="Default select example"  formControlName="skillType">
+              <option disabled>Open this select menu</option>
+              <option value="1">Skill 0</option>
+              <option value="2">Skill 1</option>
+              <option value="3">Skill 2</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="inputZip" class="form-label">Remove</label><br />
+            <button type="button" class="btn btn-success mx-2" (click)="removeSkill(i)" *ngIf="i!=0">-</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+
+  </form>
+</div>
+
